@@ -1,5 +1,6 @@
 package com.example.getirreadingisgood.order.entity;
 
+import com.example.getirreadingisgood.util.EntityConstraints;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -18,12 +19,12 @@ import java.util.UUID;
 public class Order {
     @Id
     private UUID orderId;
-    @NotNull(message = "Order should have a customer.")
+    @NotNull(message = EntityConstraints.ORDER_WITHOUT_CUSTOMER_MESSAGE)
     private UUID customerId;
 
     private List<UUID> items;
     private LocalDateTime orderDate;
 
-    @Min(value = 0)
+    @Min(value = EntityConstraints.MINIMUM_VALUE)
     private double total;
 }

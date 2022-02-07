@@ -1,5 +1,6 @@
 package com.example.getirreadingisgood.customer.entity;
 
+import com.example.getirreadingisgood.util.EntityConstraints;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -20,16 +21,23 @@ public class Customer {
     @Id
     private UUID customerId;
 
-    @NotBlank(message = "First name cannot be empty.")
+    @NotBlank(message = EntityConstraints.FIRST_NAME_BLANK_MESSAGE)
     private String firstName;
-    @NotBlank(message = "Last name cannot be empty.")
+
+    @NotBlank(message = EntityConstraints.LAST_NAME_BLANK_MESSAGE)
     private String lastName;
-    @NotEmpty(message = "Password cannot be empty.")
+
+    @Indexed(unique = true)
+    @NotEmpty(message = EntityConstraints.USERNAME_BLANK_MESSAGE)
+    private String username;
+
+    @NotEmpty(message = EntityConstraints.PASSWORD_NAME_BLANK_MESSAGE)
     private String password;
 
     @Indexed(unique = true)
-    @Email(message = "Please enter a valid email address.")
+    @Email(message = EntityConstraints.EMAIL_NOT_VALID_MESSAGE)
     private String email;
+
     private LocalDateTime registrationDate;
     private String address;
 
