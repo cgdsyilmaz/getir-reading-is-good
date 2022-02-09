@@ -27,5 +27,7 @@ Luckily I have pushed the latest Docker image to the Docker Hub as a public cont
     • Test coverage is the first thing comes to my mind in terms of improvement.
     I needed to use Embedded MongoDb or a seperate database for testing. 
     However time did not allow such a improvement.
-    • I also could have made 5 seperate microservices in terms of high level design and the overall architecture would be very neat. 
+    
+    • I also could have made 5 seperate microservices in terms of high level design
+    and the overall architecture would be very neat.
     One can apply seperation of concerns and develop Customer, Authentication, Book, Order and Statistics microservices.
