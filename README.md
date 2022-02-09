@@ -23,7 +23,7 @@ Luckily I have pushed the latest Docker image to the Docker Hub as a public cont
 
     > docker-compose -f docker-compose.yaml up
 
-## How to improve
+## Improvement ideas
     • Test coverage is the first thing comes to my mind in terms of improvement.
     I needed to use Embedded MongoDb or a seperate database for testing. 
     However time did not allow such a improvement.
