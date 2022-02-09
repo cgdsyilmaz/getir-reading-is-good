@@ -1,25 +1,29 @@
 package com.example.getirreadingisgood.statistics.entity;
 
 import com.example.getirreadingisgood.util.EntityConstraints;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.time.Month;
 import java.util.UUID;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "statistics")
 public class Statistics {
     @Id
     private UUID statisticsId;
 
-    @NotNull(message = EntityConstraints.STATISTICS_WITHOUT_CUSTOMER_MESSAGE)
+    @NotBlank(message = EntityConstraints.STATISTICS_WITHOUT_CUSTOMER_MESSAGE)
     private UUID customerId;
 
     @Indexed(unique = true)

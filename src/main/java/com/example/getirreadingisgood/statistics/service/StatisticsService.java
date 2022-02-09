@@ -1,13 +1,12 @@
 package com.example.getirreadingisgood.statistics.service;
 
-import com.example.getirreadingisgood.statistics.repository.StatisticsRepository;
-import org.springframework.stereotype.Service;
+import com.example.getirreadingisgood.order.entity.Order;
+import com.example.getirreadingisgood.statistics.entity.Statistics;
 
-@Service
-public class StatisticsService {
-    private final StatisticsRepository statisticsRepository;
+import java.util.List;
+import java.util.UUID;
 
-    public StatisticsService(StatisticsRepository statisticsRepository) {
-        this.statisticsRepository = statisticsRepository;
-    }
+public interface StatisticsService {
+    List<Statistics> getMonthlyStatisticsOfCustomer(UUID customerId);
+    void updateStatistics(Order order);
 }

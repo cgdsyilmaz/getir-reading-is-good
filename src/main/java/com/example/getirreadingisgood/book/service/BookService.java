@@ -1,13 +1,13 @@
 package com.example.getirreadingisgood.book.service;
 
-import com.example.getirreadingisgood.book.repository.BookRepository;
-import org.springframework.stereotype.Service;
+import com.example.getirreadingisgood.book.entity.Book;
 
-@Service
-public class BookService {
-    private final BookRepository bookRepository;
+import java.util.List;
+import java.util.UUID;
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+public interface BookService {
+    UUID registerBook(Book newBook);
+    int restock(UUID bookId, int additionalStock);
+    int getBookStock(UUID bookId);
+    void updateStocks(List<UUID> orderedBooks);
 }

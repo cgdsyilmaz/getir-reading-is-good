@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    container_name: mongodb
+    restart: always
+  reading-is-good:
+    image: hanyilmaz/getir-reading-is-good
+    container_name: reading-is-good-container
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_DATA_MONGODB_.HOST=mongodb
+    restart: always
+    depends_on:
+      - mongodb

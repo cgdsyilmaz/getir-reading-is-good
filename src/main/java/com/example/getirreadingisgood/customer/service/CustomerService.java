@@ -1,13 +1,13 @@
 package com.example.getirreadingisgood.customer.service;
 
-import com.example.getirreadingisgood.customer.repository.CustomerRepository;
-import org.springframework.stereotype.Service;
+import com.example.getirreadingisgood.customer.entity.Customer;
+import com.example.getirreadingisgood.order.entity.Order;
 
-@Service
-public class CustomerService {
-    private final CustomerRepository customerRepository;
+import java.util.List;
+import java.util.UUID;
 
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+public interface CustomerService {
+    UUID registerCustomer(Customer newCustomer);
+    List<Order> getOrdersOfCustomer(UUID customerId, int page, int size);
+    Customer getCustomerByUsername(String username);
 }

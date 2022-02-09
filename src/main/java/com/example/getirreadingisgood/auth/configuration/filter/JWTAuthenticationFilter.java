@@ -1,7 +1,9 @@
-package com.example.getirreadingisgood.auth.configuration;
+package com.example.getirreadingisgood.auth.configuration.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.getirreadingisgood.auth.model.JwtProperties;
+import com.example.getirreadingisgood.auth.model.UserDetailsImpl;
 import com.example.getirreadingisgood.customer.entity.Customer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,11 +20,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProperties jwtProperties;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JwtProperties jwtProperties) {
         this.authenticationManager = authenticationManager;
-
+        this.jwtProperties = jwtProperties;
         setFilterProcessesUrl("/customer/login");
     }
 
@@ -45,14 +48,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain filterChain,
                                             Authentication auth) throws IOException {
         String token = JWT.create()
-                .withSubject(((Customer) auth.getPrincipal()).getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(Algorithm.HMAC512(SECRET.getBytes()));
+                .withSubject(((UserDetailsImpl) auth.getPrincipal()).getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpiration()))
+                .sign(Algorithm.HMAC512(jwtProperties.getSecret().getBytes()));
 
-        String body = ((User) auth.getPrincipal()).getUsername() + " " + token;
+        String body = ((UserDetailsImpl) auth.getPrincipal()).getUsername() + " " + token;
 
-        res.getWriter().write(body);
-        res.getWriter().flush();
-
+        response.getWriter().write(body);
+        response.getWriter().flush();
     }
  }

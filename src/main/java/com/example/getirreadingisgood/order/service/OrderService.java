@@ -1,13 +1,14 @@
 package com.example.getirreadingisgood.order.service;
 
-import com.example.getirreadingisgood.order.repository.OrderRepository;
-import org.springframework.stereotype.Service;
+import com.example.getirreadingisgood.order.entity.Order;
 
-@Service
-public class OrderService {
-    private final OrderRepository orderRepository;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
-    public OrderService(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+public interface OrderService {
+    List<Order> getOrdersOfCustomer(UUID customerId, int page, int size);
+    UUID enterOrder(Order newOrder);
+    Order getOrderById(UUID orderId);
+    List<Order> getOrdersBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
 }
